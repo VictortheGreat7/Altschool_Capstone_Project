@@ -36,15 +36,19 @@ jobs:
       with:
         version: 'v1.30.3'
 
+    - name: Create Azure Resource Group and Storage Account for Terraform Backend
+      run: |
+        sudo az group create --name backend-rg --location southafricanorth
+        sudo az storage account create --resource-group backend-rg --name tfbackend101 --sku Standard_LRS --encryption-services blob
+        sudo az storage container create --name tfstate --account-name tfbackend101
+
     - name: Run inline bash script
       run: |
-        chmod +x ./pre-apply.sh
         chmod +x ./authorized_ips.sh
       working-directory: ./capstone_terraform
 
     - name: Run inline bash script
       run: |
-        ./pre-apply.sh
         ./authorized_ips.sh
       working-directory: ./capstone_terraform
 
