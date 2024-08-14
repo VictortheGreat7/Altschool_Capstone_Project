@@ -40,7 +40,9 @@ jobs:
     - name: Azure CLI Login
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ steps.azure-creds.outputs.client_id }}
+        tenant-id: ${{ steps.azure-creds.outputs.tenant_id }}
+        subscription-id: ${{ steps.azure-creds.outputs.subscription_id }}
 
     - name: Setup kubectl
       uses: azure/setup-kubectl@v3
