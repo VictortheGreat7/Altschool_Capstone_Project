@@ -1,0 +1,22 @@
+variable "rg_name" {
+  description = "The name of the resource group"
+  type        = string
+  default     = "altschool-capstone-rg"
+}
+
+variable "region" {
+  description = "The location/region of the resource group"
+  type        = string
+  default     = "southafricanorth"
+}
+
+variable "cluster_name" {
+  description = "The name of the AKS cluster"
+  type        = string
+  default     = "capstone_cluster"
+}
+
+variable "allowed_source_addresses" {
+  description = "List of authorized ip addresses"
+  type        = list(string)
+}

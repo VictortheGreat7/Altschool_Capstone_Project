@@ -1,0 +1,81 @@
+---
+- name: Set up Kubernetes cluster
+  hosts: localhost
+  vars_files:
+    - secrets.yaml  # This file is encrypted with Ansible Vault
+  tasks:
+    - name: Log in to Azure CLI with Service Principal
+      ansible.builtin.command:
+        cmd: >
+          az login --service-principal -u {{ azure.client_id }} -p {{ azure.client_secret }} --tenant {{ azure.tenant_id }}
+      become: yes
+
+    - name: Get AKS credentials
+      ansible.builtin.command:
+        cmd: az aks get-credentials --resource-group {{ terraform.resource_group }} --name {{ terraform.cluster_name }} --overwrite-existing
+      become: yes
+
+    - name: Apply Nginx Ingress Controller
+      ansible.builtin.command:
+        cmd: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+      become: yes
+
+    - name: Apply Cert Manager
+      ansible.builtin.command:
+        cmd: kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.11.0/cert-manager.yaml
+      become: yes
+
+    - name: Apply Logging Manifests
+      ansible.builtin.command:
+        cmd: kubectl apply -f microservices_manifests/manifests-logging
+      become: yes
+
+    - name: Apply Sock-Shop Microservices Manifests
+      ansible.builtin.command:
+        cmd: kubectl apply -f microservices_manifests/complete-demo.yaml
+      become: yes
+
+    - name: Apply Monitoring Manifests
+      ansible.builtin.command:
+        cmd: kubectl apply -f microservices_manifests/manifests-monitoring
+      become: yes
+
+    - name: Apply Alerting Manifests
+      ansible.builtin.command:
+        cmd: kubectl apply -f microservices_manifests/manifests-alerting
+      become: yes
+
+    - name: Apply Pod Autoscaling Manifests
+      ansible.builtin.command:
+        cmd: kubectl apply -f microservices_manifests/autoscaling
+      become: yes
+
+    - name: Apply Network Policy Manifests
+      ansible.builtin.command:
+        cmd: kubectl apply -f microservices_manifests/manifests-policy
+      become: yes
+
+    - name: Apply Issuer and Ingress Manifests
+      ansible.builtin.command:
+        cmd: kubectl apply -f microservices_manifests/ingress.yaml
+      become: yes
+    
+    - name: Get all pods in all namespaces
+      ansible.builtin.command:
+        cmd: kubectl get pods --all-namespaces
+      register: pods_output
+      become: yes
+
+    - name: Display all pods in all namespaces
+      ansible.builtin.debug:
+        msg: "{{ pods_output.stdout }}"
+
+    - name: Get all ingress resources
+      ansible.builtin.command:
+        cmd: kubectl get ingress
+      register: ingress_output
+      become: yes
+
+    - name: Display all ingress resources
+      ansible.builtin.debug:
+        msg: "{{ ingress_output.stdout }}"
