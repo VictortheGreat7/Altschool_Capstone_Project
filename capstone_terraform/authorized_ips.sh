@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Check if the curl command exists and install it if it doesn't
-if ! command -v curl &> /dev/null; then
+if ! sudo command -v curl &> /dev/null; then
   echo "Error: curl command not found. Installing curl..."
   sudo apt-get update
   sudo apt-get install -y curl
@@ -20,7 +20,7 @@ if [ $? -eq 0 ]; then
   
   if [ -n "$EXISTING_CONTENT" ]; then
     # If the line exists, append the new IP inside the square brackets
-    sed -i "s|\(allowed_source_addresses = \[.*\)\]|\1, \"$IP_ADDRESS\"]|" "$TFVARS_FILE"
+    sudo sed -i "s|\(allowed_source_addresses = \[.*\)\]|\1, \"$IP_ADDRESS\"]|" "$TFVARS_FILE"
   else
     # If the line doesn't exist, append it
     echo "allowed_source_addresses = [\"$IP_ADDRESS\"]" >> "$TFVARS_FILE"

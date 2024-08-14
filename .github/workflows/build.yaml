@@ -38,8 +38,8 @@ jobs:
 
     - name: Run inline bash script
       run: |
-        sudo ./pre-apply.sh
-        sudo ./authorized_ips.sh
+        ./pre-apply.sh
+        ./authorized_ips.sh
       working-directory: ./capstone_terraform
 
     - name: Terraform Init
