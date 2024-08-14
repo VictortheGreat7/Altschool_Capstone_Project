@@ -38,7 +38,7 @@ jobs:
 
     - name: Run inline bash script
       run: |
-        ./pre_apply.sh
+        ./pre-apply.sh
         ./authorized_ips.sh
       working-directory: ./capstone_terraform
 
