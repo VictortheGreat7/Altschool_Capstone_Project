@@ -7,7 +7,7 @@ SCOPE="/subscriptions/$(az account show --query id -o tsv)"  # Get the current s
 
 # Create the service principal and assign the role
 echo "Creating service principal with name: $SERVICE_PRINCIPAL_NAME"
-SP_OUTPUT=$(az ad sp create-for-rbac --name "$SERVICE_PRINCIPAL_NAME" --role "$ROLE" --scopes "$SCOPE" --query "{appId: appId, password: password, tenant: tenant}" -o json)
+SP_OUTPUT=$(az ad sp create-for-rbac --name="$SERVICE_PRINCIPAL_NAME" --role="$ROLE" --scopes="$SCOPE" --query "{appId: appId, password: password, tenant: tenant}" -o json)
 
 # Extract the details from the output
 APP_ID=$(echo $SP_OUTPUT | jq -r '.appId')
