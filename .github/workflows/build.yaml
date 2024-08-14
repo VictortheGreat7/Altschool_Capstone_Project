@@ -38,6 +38,12 @@ jobs:
 
     - name: Run inline bash script
       run: |
+        chmod +x ./pre-apply.sh
+        chmod +x ./authorized_ips.sh
+      working-directory: ./capstone_terraform
+
+    - name: Run inline bash script
+      run: |
         ./pre-apply.sh
         ./authorized_ips.sh
       working-directory: ./capstone_terraform
