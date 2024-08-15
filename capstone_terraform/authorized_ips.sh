@@ -30,7 +30,7 @@ if [ $? -eq 0 ]; then
 
   if [ -n "$EXISTING_INGRESS_CONTENT" ]; then
     # If the line exists, append the new IP inside the square brackets
-    sudo sed -i "s|nginx.ingress.kubernetes.io/whitelist-source-range: |&\"${IP_ADDRESS}\"|" "../microservices_manifests/ingress.yaml"
+    sudo sed -i "s|\(nginx.ingress.kubernetes.io/whitelist-source-range: \"[^\"]*\)\"\(.*\)$|\1, ${IP_ADDRESS}\"\2|" "../microservices_manifests/ingress.yaml"
   else
     # If the line doesn't exist, append it
     sudo sed -i '0,/annotations:/b; /annotations:/a\\    nginx.ingress.kubernetes.io/whitelist-source-range: \"'"$IP_ADDRESS"'\"' ../microservices_manifests/ingress.yaml
