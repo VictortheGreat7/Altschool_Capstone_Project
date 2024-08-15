@@ -42,6 +42,20 @@ jobs:
       with:
         version: 'v1.30.3'
 
+    - name: Install Ansible
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common
+        sudo add-apt-repository --yes --update ppa:ansible/ansible
+        sudo apt-get install -y ansible
+
+    - name: Decrypt Ansible Vault
+      env:
+        ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+      run: |
+        echo "$ANSIBLE_VAULT_PASSWORD" > vault_password.txt
+        ansible-vault decrypt terraform.tfvars --vault-password-file vault_password.txt
+
     - name: Run inline bash script
       run: |
         chmod +x pre-apply.sh
@@ -67,18 +81,8 @@ jobs:
         git push
       working-directory: ./capstone_terraform
 
-    - name: Install Ansible
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y software-properties-common
-        sudo add-apt-repository --yes --update ppa:ansible/ansible
-        sudo apt-get install -y ansible
-
     - name: Run Ansible Playbook
-      env:
-        ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
       run: |
-        echo "$ANSIBLE_VAULT_PASSWORD" > vault_password.txt
         ansible-playbook clusterconfig_playbook.yaml --vault-password-file vault_password.txt
 
     - name: Clean up
