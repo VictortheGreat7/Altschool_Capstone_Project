@@ -24,5 +24,4 @@ variable "allowed_source_addresses" {
 variable "my_user_object_id" {
   description = "The object id of the user"
   type        = string
-  default = "ebf0b934-2ccb-4237-8a97-a2ed2915e5a6"
 }

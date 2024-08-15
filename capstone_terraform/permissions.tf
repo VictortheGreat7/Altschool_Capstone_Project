@@ -4,7 +4,7 @@ resource "azuread_group" "aks_admins" {
   security_enabled = true
 
   members = [
-    data.azuread_client_config.current.object_id,
+    data.azuread_client_config.current.object_id, 
     var.my_user_object_id
   ]
 }

@@ -50,11 +50,6 @@
         cmd: kubectl apply -f microservices_manifests/manifests-alerting
       become: yes
 
-    - name: Apply Pod Autoscaling Manifests
-      ansible.builtin.command:
-        cmd: kubectl apply -f microservices_manifests/autoscaling
-      become: yes
-
     - name: Apply Network Policy Manifests
       ansible.builtin.command:
         cmd: kubectl apply -f microservices_manifests/manifests-policy
@@ -63,6 +58,11 @@
     - name: Apply Issuer and Ingress Manifests
       ansible.builtin.command:
         cmd: kubectl apply -f microservices_manifests/ingress.yaml
+      become: yes
+
+    - name: Apply Pod Autoscaling Manifests
+      ansible.builtin.command:
+        cmd: kubectl apply -f microservices_manifests/autoscaling
       become: yes
     
     - name: Get all pods in all namespaces

@@ -19,7 +19,6 @@ metadata:
   name: sock-shop-ingress
   namespace: sock-shop
   annotations:
-    # nginx.ingress.kubernetes.io/rewrite-target: /
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   ingressClassName: nginx
@@ -45,10 +44,8 @@ metadata:
   name: monitoring-ingress
   namespace: monitoring
   annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: "102.88.68.63/32"
     cert-manager.io/cluster-issuer: "letsencrypt"
-    nginx.ingress.kubernetes.io/whitelist-source-range: "197.210.29.28"
-    # nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
-    # nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
 spec:
   ingressClassName: nginx
   tls:
@@ -83,8 +80,8 @@ kind: Ingress
 metadata:
   name: alertmanager-ingress
   annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: "102.88.68.63/32"
     cert-manager.io/cluster-issuer: "letsencrypt"
-    nginx.ingress.kubernetes.io/whitelist-source-range: "197.210.29.28"
 spec:
   ingressClassName: nginx
   tls:
@@ -109,8 +106,8 @@ metadata:
   name: kibana-ingress
   namespace: kube-system
   annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: "102.88.68.63/32"
     cert-manager.io/cluster-issuer: "letsencrypt"
-    nginx.ingress.kubernetes.io/whitelist-source-range: "197.210.29.28"
 spec:
   ingressClassName: nginx
   tls:
