@@ -22,14 +22,6 @@ jobs:
       with:
         terraform_version: 1.9.4
 
-    - name: Cache Terraform plugins
-      uses: actions/cache@v3
-      with:
-        path: ~/.terraform.d/plugin-cache
-        key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
-        restore-keys: |
-          ${{ runner.os }}-terraform-
-
     - name: Azure CLI Login
       uses: azure/login@v1
       with:
@@ -55,6 +47,11 @@ jobs:
         chmod +x authorized_ips.sh
         ./pre-apply.sh
         ./authorized_ips.sh
+      working-directory: ./capstone_terraform
+
+    - name: Azure Account Show
+      run: |
+        az account show
       working-directory: ./capstone_terraform
 
     - name: Terraform Init
