@@ -21,7 +21,7 @@ resource "azurerm_role_assignment" "cluster_role_assignment" {
 # Assign Reader role to the AAD group for the Resource Group
 resource "azurerm_role_assignment" "aks_admins_rg_reader" {
   scope                = azurerm_resource_group.aks_rg.id
-  role_definition_name = "Owner"
+  role_definition_name = "Contributor"
   principal_id         = azuread_group.aks_admins.object_id
 
   depends_on = [
@@ -29,12 +29,10 @@ resource "azurerm_role_assignment" "aks_admins_rg_reader" {
   ]
 }
 
-data "azurerm_client_config" "current" {}
-
 # Assign Reader role to the AAD group for the Node Resource Group
 resource "azurerm_role_assignment" "aks_admins_node_rg_reader" {
   scope                = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${var.rg_name}-nrg"
-  role_definition_name = "Owner"
+  role_definition_name = "Contributor"
   principal_id         = azuread_group.aks_admins.object_id
 
   depends_on = [
