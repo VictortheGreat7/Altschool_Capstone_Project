@@ -21,22 +21,22 @@ variable "allowed_source_addresses" {
   type        = list(string)
 }
 
-variable "client_id" {
-  description = "The client id of the service principal"
-  type        = string
-}
+# variable "client_id" {
+#   description = "The client id of the service principal"
+#   type        = string
+# }
 
-variable "tenant_id" {
-  description = "The tenant id of the service principal"
-  type        = string
-}
+# variable "client_secret" {
+#   description = "The client secret of the service principal"
+#   type        = string
+# }
 
-variable "client_secret" {
-  description = "The client secret of the service principal"
-  type        = string
-}
+# variable "tenant_id" {
+#   description = "The tenant id of the service principal"
+#   type        = string
+# }
 
-variable "subscription_id" {
-  description = "The subscription id"
-  type        = string
-}
+# variable "subscription_id" {
+#   description = "The subscription id"
+#   type        = string
+# } 
