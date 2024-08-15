@@ -31,6 +31,11 @@ variable "tenant_id" {
   type        = string
 }
 
+variable "client_secret" {
+  description = "The client secret of the service principal"
+  type        = string
+}
+
 variable "subscription_id" {
   description = "The subscription id"
   type        = string
