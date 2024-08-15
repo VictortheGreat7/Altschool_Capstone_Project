@@ -79,14 +79,18 @@ jobs:
       run: terraform apply --auto-approve
       working-directory: ./capstone_terraform
 
-    - name: Commit .terraform.lock.hcl
+    - name: Configure Git
       run: |
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Actions"
+
+    - name: Commit and Push Changes
+      env:
+        GH_PAT: ${{ secrets.GH_PAT }}
+      run: |
         git add .terraform.lock.hcl
         git commit -m "Update .terraform.lock.hcl"
-        git push
-      working-directory: ./capstone_terraform
+        git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/VictortheGreat7/Altschool_Capstone_Project.git
 
     - name: Run Ansible Playbook
       env:
