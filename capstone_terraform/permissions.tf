@@ -31,7 +31,7 @@ resource "azurerm_role_assignment" "aks_admins_rg_reader" {
 
 # Assign Reader role to the AAD group for the Node Resource Group
 resource "azurerm_role_assignment" "aks_admins_node_rg_reader" {
-  scope                = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${var.rg_name}-nrg"
+  scope                = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${var.cluster_name}-nrg"
   role_definition_name = "Contributor"
   principal_id         = azuread_group.aks_admins.object_id
 
