@@ -5,6 +5,7 @@ resource "azuread_group" "aks_admins" {
 
   members = [
     data.azuread_client_config.current.object_id
+    var.my_user_object_id
   ]
 }
 

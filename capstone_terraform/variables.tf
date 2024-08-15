@@ -21,22 +21,8 @@ variable "allowed_source_addresses" {
   type        = list(string)
 }
 
-# variable "client_id" {
-#   description = "The client id of the service principal"
-#   type        = string
-# }
-
-# variable "client_secret" {
-#   description = "The client secret of the service principal"
-#   type        = string
-# }
-
-# variable "tenant_id" {
-#   description = "The tenant id of the service principal"
-#   type        = string
-# }
-
-# variable "subscription_id" {
-#   description = "The subscription id"
-#   type        = string
-# } 
+variable "my_user_object_id" {
+  description = "The object id of the user"
+  type        = string
+  default = "ebf0b934-2ccb-4237-8a97-a2ed2915e5a6"
+}
