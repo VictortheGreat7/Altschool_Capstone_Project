@@ -44,7 +44,6 @@ metadata:
   name: monitoring-ingress
   namespace: monitoring
   annotations:
-    nginx.ingress.kubernetes.io/whitelist-source-range: "102.88.68.63/32"
     cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
   ingressClassName: nginx
@@ -80,7 +79,6 @@ kind: Ingress
 metadata:
   name: alertmanager-ingress
   annotations:
-    nginx.ingress.kubernetes.io/whitelist-source-range: "102.88.68.63/32"
     cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
   ingressClassName: nginx
@@ -106,7 +104,6 @@ metadata:
   name: kibana-ingress
   namespace: kube-system
   annotations:
-    nginx.ingress.kubernetes.io/whitelist-source-range: "102.88.68.63/32"
     cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
   ingressClassName: nginx
