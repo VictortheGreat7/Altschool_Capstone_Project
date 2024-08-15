@@ -29,6 +29,13 @@ jobs:
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+    - name: Azure CLI script
+      uses: azure/cli@v2
+      with:
+        azcliversion: latest
+        inlineScript: |
+          az account show
+
     - name: Setup kubectl
       uses: azure/setup-kubectl@v3
       with:
@@ -47,11 +54,6 @@ jobs:
         chmod +x authorized_ips.sh
         ./pre-apply.sh
         ./authorized_ips.sh
-      working-directory: ./capstone_terraform
-
-    - name: Azure Account Show
-      run: |
-        az account show
       working-directory: ./capstone_terraform
 
     - name: Terraform Init
