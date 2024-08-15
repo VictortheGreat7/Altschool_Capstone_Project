@@ -55,6 +55,7 @@ jobs:
       run: |
         echo "$ANSIBLE_VAULT_PASSWORD" > vault_password.txt
         ansible-vault decrypt terraform.tfvars --vault-password-file vault_password.txt
+      working-directory: ./capstone_terraform
 
     - name: Run inline bash script
       run: |
