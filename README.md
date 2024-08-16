@@ -9,13 +9,13 @@ In this repository, you have the Terraform, Bash and Ansible scripts you will ne
 - An [Azure Account](https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account?icid=azurefreeaccount) (preferably with an Entra ID User Account with a Subscription Owner and Entra ID Global Administrator roles assigned to it. Also, some of the services you will use are not free. The account needs to be funded)
 - A Domain Provider (e.g. [Name.com](https://www.name.com/), [Namecheap](https://www.namecheap.com/), etc)
 - A [GitHub](https://github.com/) Account
-- An Ubuntu Machine (There are bash scripts, in this project, that need to be run. Sudo privileges are also important). If you do not have an Ubuntu Machine, you can use a Virtual Ubuntu Machine. Windows Subsystem for Linux (WSL) is also fine (make sure to use the Ubuntu distribution). Just make sure all the needed tools here are not being borrowed from your Windows environment (for instance, Azure CLI and kubectl installed on your windows machine can be used on WSL too). You have to install them again for WSL specifically to avoid conflicts.
+- An Ubuntu Machine (There are bash scripts, in this project, that need to be run. Sudo privileges are also important). If you do not have an Ubuntu Machine, you can use a Virtual Ubuntu Machine. Windows Subsystem for Linux (WSL) is also fine (make sure to use the Ubuntu distribution). Just make sure all the needed tools here are not being borrowed from your Windows environment (for instance, Azure CLI and kubectl installed on your windows machine can be used on WSL too). You have to install them in the WSL environment specifically to avoid conflicts.
 - [Git](https://git-scm.com/download/linux) installed on your machine
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt) installed on your machine
 - [kubectl CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) installed on your machine
-- [kubelogin CLI](https://azure.github.io/kubelogin/install.html) installed on your machine. It will be easier using the Azure CLI method to install it
+- [kubelogin CLI](https://azure.github.io/kubelogin/install.html) installed on your machine. I recommend that you use Azure CLI to install it
 - [jq](https://jqlang.github.io/jq/download/) (a commandline JSON processor) installed on your machine (`service_principal.sh` will try to install it if you don't have it)
-- [cURL](https://cURL.se/) command installed on your Ubuntu (`authorized_ips.sh` will try to install it if you don't have it)
+- [curl](https://curl.se/) command installed on your Ubuntu (`authorized_ips.sh` will try to install it if you don't have it)
 - Ansible and Ansible Vault installed on your machine
 
 ## Instructions
