@@ -1,3 +1,5 @@
+# This file contains the terraform code to create the necessary permissions for the AKS cluster
+
 resource "azuread_group" "aks_admins" {
   display_name     = "aks-admins"
   owners           = [data.azuread_client_config.current.object_id]

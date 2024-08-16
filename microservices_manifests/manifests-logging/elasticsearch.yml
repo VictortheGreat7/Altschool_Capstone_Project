@@ -1,3 +1,5 @@
+# This manifest file is used to deploy the elasticsearch service in the kubernetes cluster.
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:

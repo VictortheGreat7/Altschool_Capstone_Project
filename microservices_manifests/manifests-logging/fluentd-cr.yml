@@ -1,3 +1,4 @@
+# This is the ClusterRole for fluentd to access the logs of the pods in the cluster.
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole

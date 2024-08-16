@@ -1,3 +1,5 @@
+# This is a manifest file for deploying Grafana in the monitoring namespace. This deployment is used to monitor the metrics of the microservices deployed in the monitoring namespace. The deployment is exposed as a service to access the Grafana dashboard.
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:

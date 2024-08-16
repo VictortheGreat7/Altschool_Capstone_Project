@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Define variables
-SERVICE_PRINCIPAL_NAME="capstone-service-principal"  # Change this to your desired service principal name
+SERVICE_PRINCIPAL_NAME="capstone-service-principal"
 ROLE="Owner"
 SCOPE="/subscriptions/$(az account show --query id -o tsv)"  # Get the current subscription ID
-GITHUB_NAME=VictortheGreat7
+GITHUB_NAME=VictortheGreat7 # Change this to your GitHub username
 GITHUB_REPO=Altschool_Capstone_Project
 CREDENTIALS=$(cat <<EOF
 {
@@ -18,10 +18,10 @@ CREDENTIALS=$(cat <<EOF
 }
 EOF
 )
-ESCAPED_CREDENTIALS=$(echo "$CREDENTIALS" | jq -c .)
-USER_OBJECT_ID=$(az ad signed-in-user show --query id)
+ESCAPED_CREDENTIALS=$(echo "$CREDENTIALS" | jq -c .) # Escape the credentials for the az command
+USER_OBJECT_ID=$(az ad signed-in-user show --query id) # Get the current user's object ID
 
-# Create the service principal and assign the role
+# Create the service principal and assign Owner role
 echo "Creating service principal with name: $SERVICE_PRINCIPAL_NAME"
 SP_OUTPUT=$(az ad sp create-for-rbac --name="$SERVICE_PRINCIPAL_NAME" --role="$ROLE" --scopes="$SCOPE" --query "{appId: appId, objectId: objectId, password: password, tenant: tenant}" -o json)
 
@@ -38,7 +38,7 @@ echo "Password (Client Secret): $PASSWORD"
 echo "Tenant ID: $TENANT"
 echo "Subscription ID: $(az account show --query id -o tsv)"
 
-# Optional: Save the details to a file
+# Save the details to a file
 echo "Saving service principal details to secrets.yaml"
 echo "azure:
   client_id: \"$APP_ID\"

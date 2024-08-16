@@ -1,3 +1,5 @@
+# This file is used to create a namespace for monitoring microservices
+
 apiVersion: v1
 kind: Namespace
 metadata:

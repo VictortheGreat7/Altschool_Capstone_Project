@@ -14,13 +14,16 @@ permissions:
 
 jobs:
   deploy:
+    # This job runs on the latest version of Ubuntu
     runs-on: ubuntu-latest
 
     steps:
+    # Login to Azure CLI using the Azure login action
     - uses: azure/login@v2
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+    # This step is used to check the Azure account that is logged in
     - name: Azure CLI script
       uses: azure/cli@v2
       with:
@@ -28,14 +31,17 @@ jobs:
         inlineScript: |
           az account show
 
+    # Checkout the repository
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    # Setup Terraform
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
       with:
         terraform_version: 1.9.4
 
+    # Cache Terraform plugins to speed up the workflow
     - name: Cache Terraform plugins
       uses: actions/cache@v3
       with:
@@ -44,11 +50,13 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-terraform-
 
+    # Setup kubectl
     - name: Setup kubectl
       uses: azure/setup-kubectl@v3
       with:
         version: 'v1.30.3'
 
+    # Install Ansible
     - name: Install Ansible
       run: |
         sudo apt-get update
@@ -56,9 +64,11 @@ jobs:
         sudo add-apt-repository --yes --update ppa:ansible/ansible
         sudo apt-get install -y ansible
 
+    # Install Azure CLI
     - name: Install Kubelogin
       run: sudo az aks install-cli
 
+    # Run bash scripts to prepare the backend for Terraform and authorized current IP to access the AKS cluster
     - name: Run inline bash script
       run: |
         chmod +x pre-apply.sh
@@ -67,6 +77,7 @@ jobs:
         ./authorized_ips.sh
       working-directory: ./capstone_terraform
 
+    # Initialize Terraform
     - name: Terraform Init
       env:
         ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
@@ -76,6 +87,7 @@ jobs:
       run: terraform init
       working-directory: ./capstone_terraform
 
+    # Apply Terraform configuration
     - name: Terraform Apply
       env:
         ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
@@ -85,6 +97,8 @@ jobs:
       run: terraform apply --auto-approve
       working-directory: ./capstone_terraform
 
+
+    # Run Ansible playbook to configure the AKS cluster
     - name: Run Ansible Playbook
       env:
         ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
@@ -92,6 +106,8 @@ jobs:
         echo "$ANSIBLE_VAULT_PASSWORD" > vault_password.txt
         ansible-playbook clusterconfig_playbook.yaml --vault-password-file vault_password.txt
 
+
+    # Clean up
     - name: Clean up
       if: always()
       run: rm -f vault_password.txt

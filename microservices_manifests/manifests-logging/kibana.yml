@@ -1,3 +1,5 @@
+# This manifest file is used to deploy Kibana in the Kubernetes cluster.
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:

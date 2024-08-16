@@ -1,3 +1,5 @@
+# This file contains the deployment manifest for the Prometheus deployment.
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:

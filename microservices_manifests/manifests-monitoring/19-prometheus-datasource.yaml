@@ -1,3 +1,5 @@
+# This file is used to create a ConfigMap that contains the Prometheus datasource configuration for Grafana.
+
 apiVersion: v1
 data:
   prometheus-datasource.json: |

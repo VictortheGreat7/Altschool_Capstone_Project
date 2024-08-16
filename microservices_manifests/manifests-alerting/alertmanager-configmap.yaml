@@ -1,3 +1,5 @@
+# This is the ConfigMap for the AlertManager. It contains the configuration for the AlertManager, including the Slack hook URL, the routing rules, and the receivers. The Slack hook URL is stored in a secret and is injected into the ConfigMap using a script that runs when the ConfigMap is created. The ConfigMap is mounted as a volume in the AlertManager pod, so that the AlertManager can read the configuration from the ConfigMap.
+
 kind: ConfigMap
 apiVersion: v1
 metadata:

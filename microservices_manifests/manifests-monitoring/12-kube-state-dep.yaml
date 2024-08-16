@@ -1,3 +1,5 @@
+# This manifest is for deploying kube-state-metrics in the monitoring namespace.
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:

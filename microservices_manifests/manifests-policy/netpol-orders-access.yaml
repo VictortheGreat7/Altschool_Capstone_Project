@@ -1,3 +1,4 @@
+# Description: Network policy to allow access to orders service from front-end service
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy

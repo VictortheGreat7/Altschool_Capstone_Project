@@ -1,3 +1,5 @@
+# This is a manifest file for creating a ConfigMap in the monitoring namespace of the Kubernetes cluster. This ConfigMap is used to import a pre-built Prometheus Stats Dashboard in Grafana. The dashboard is created using JSON format and is stored in the data field of the ConfigMap. The dashboard displays various metrics related to Prometheus monitoring system such as Uptime, Local Storage Memory Series, Internal Storage Queue Length, Samples Ingested, Target Scrapes, Scrape Duration, Rule Eval Duration, etc. The dashboard also contains links to Grafana and Prometheus documentation for more information. The ConfigMap is created with the name grafana-import-dashboards-prometheus-stats-dashboard in the monitoring namespace.
+
 apiVersion: v1
 data:
   prometheus-stats-dashboard.json: |

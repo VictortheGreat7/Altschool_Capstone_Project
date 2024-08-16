@@ -1,3 +1,5 @@
+# This file is used to deploy the node-exporter daemonset on the k8s cluster. The node-exporter is used to collect the metrics from the nodes in the k8s cluster. The node-exporter is deployed as a daemonset so that it runs on all the nodes in the k8s cluster. The node-exporter is deployed in the monitoring namespace.
+
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:

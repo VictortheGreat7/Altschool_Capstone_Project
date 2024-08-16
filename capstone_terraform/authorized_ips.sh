@@ -12,6 +12,7 @@ IP_ADDRESS=$(curl -s ifconfig.me)/32
 
 # Terraform variables file
 TFVARS_FILE="terraform.tfvars"
+# Kubernetes ingress file
 K8SINGRESS_FILE="../microservices_manifests/ingress.yaml"
 
 # Check if the curl command was successful

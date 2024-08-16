@@ -1,3 +1,5 @@
+# This is a sample dashboard for monitoring Kubernetes pod resources using Grafana and Prometheus.
+
 apiVersion: v1
 data:
   k8s-pod-resources-dashboard.json: |

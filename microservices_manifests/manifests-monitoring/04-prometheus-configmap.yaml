@@ -1,3 +1,5 @@
+# Description: This file contains the configuration for the Prometheus server. It specifies the global scrape interval, rule files, alerting configurations, and scrape configurations for various Kubernetes resources such as nodes, pods, services, ingresses, and endpoints. It also specifies the targets for the alertmanager and blackbox-exporter services.
+
 apiVersion: v1
 kind: ConfigMap
 metadata:

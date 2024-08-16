@@ -1,3 +1,5 @@
+# This manifest is for creating a service for kube-state-metrics deployment.
+
 apiVersion: v1
 kind: Service
 metadata:

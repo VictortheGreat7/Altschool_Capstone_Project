@@ -1,3 +1,4 @@
+# This is the complete manifest file for the sock-shop microservices application.
 ---
 apiVersion: v1
 kind: Namespace

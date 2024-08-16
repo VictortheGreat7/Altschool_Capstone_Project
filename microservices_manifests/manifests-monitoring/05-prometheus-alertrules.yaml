@@ -1,3 +1,5 @@
+# This file contains the alert rules for Prometheus. These rules are used to define alerts that should be triggered based on the metrics collected by Prometheus. The rules are defined in the alert.rules field of the ConfigMap. The rules are defined in YAML format and are grouped by name.
+
 # Useful examples on how to configure Prometheus
 # * https://www.weave.works/prometheus-and-kubernetes-monitoring-your-applications/
 # * https://grafana.net/dashboards/162

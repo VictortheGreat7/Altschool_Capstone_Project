@@ -8,10 +8,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Log in to Azure using service principal credentials stored in GitHub Secrets
     - uses: azure/login@v2
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+    # Run a simple Azure CLI command to verify login
     - name: Azure CLI script
       uses: azure/cli@v2
       with:
@@ -19,14 +21,17 @@ jobs:
         inlineScript: |
           az account show
 
+    # Checkout the repository to access code and configuration files
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    # Set up Terraform
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
       with:
         terraform_version: 1.9.4
 
+    # Cache Terraform plugins to speed up future runs
     - name: Cache Terraform plugins
       uses: actions/cache@v3
       with:
@@ -35,6 +40,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-terraform-
 
+    # Initialize Terraform configuration
     - name: Terraform Init
       env:
         ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
@@ -44,6 +50,7 @@ jobs:
       run: terraform init
       working-directory: ./capstone_terraform
 
+    # Destory Infrastructure
     - name: Terraform Destroy
       env:
         ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}

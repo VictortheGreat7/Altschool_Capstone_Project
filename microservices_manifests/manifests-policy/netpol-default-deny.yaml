@@ -1,3 +1,4 @@
+# Description: Network policy to deny all incoming traffic to the sock-shop namespace
 ---
 kind: Namespace
 apiVersion: v1

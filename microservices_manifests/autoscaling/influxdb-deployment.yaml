@@ -1,3 +1,5 @@
+# Description: This file contains the deployment configuration for the InfluxDB service.
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:

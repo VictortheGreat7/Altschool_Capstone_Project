@@ -1,3 +1,5 @@
+# This file is used to create a service for the heapster pod. The service is used to expose the heapster pod to the outside world. The service is created in the kube-system namespace.
+
 apiVersion: v1
 kind: Service
 metadata:

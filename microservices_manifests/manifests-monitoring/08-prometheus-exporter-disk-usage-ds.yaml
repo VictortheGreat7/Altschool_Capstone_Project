@@ -1,3 +1,5 @@
+# This file contains the DaemonSet definition for the node-directory-size-metrics service. This service provides metrics in Prometheus format about disk usage on the nodes. The container read-du reads in sizes of all directories below /mnt and writes that to /tmp/metrics. It only reports directories larger than 100M for now. The other container caddy just hands out the contents of that file on request via http on /metrics at port 9102 which are the defaults for Prometheus. These are scheduled on every node in the Kubernetes cluster. To choose directories from the node to check, just mount them on the read-du container below /mnt.
+
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:

@@ -1,3 +1,5 @@
+# This file is used to create a ConfigMap in the monitoring namespace that contains the Grafana dashboard for the sock-shop resources.
+
 apiVersion: v1
 data:
   sock-shop-resources-dashboard.json: |

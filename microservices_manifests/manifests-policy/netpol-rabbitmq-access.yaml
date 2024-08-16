@@ -1,3 +1,4 @@
+# Description: Network policy to allow access to RabbitMQ from Shipping and Queue-master services
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy

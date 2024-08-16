@@ -1,3 +1,5 @@
+# This is a sample dashboard for monitoring Kubernetes nodes using Prometheus Node Exporter metrics.
+
 apiVersion: v1
 data:
   prometheus-node-exporter-dashboard.json: |

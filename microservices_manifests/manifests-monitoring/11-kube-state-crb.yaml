@@ -1,3 +1,5 @@
+# This file is used to create a ClusterRoleBinding for the kube-state-metrics service account.
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:

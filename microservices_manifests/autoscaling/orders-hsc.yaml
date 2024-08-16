@@ -1,3 +1,4 @@
+# This file contains the Horizontal Pod Autoscaler configuration for the orders service
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler

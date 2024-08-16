@@ -1,3 +1,5 @@
+# This file is used to create a Job that imports Grafana dashboards and datasources.
+
 apiVersion: batch/v1
 kind: Job
 metadata:

@@ -1,3 +1,4 @@
+# This file contains the data sources that are used in the Terraform configuration.
 data "azurerm_kubernetes_service_versions" "current" {
   location        = var.region
   include_preview = false

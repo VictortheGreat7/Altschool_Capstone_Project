@@ -1,3 +1,5 @@
+# This file contains the manifest for the Grafana dashboard for the sock-shop-analytics dashboard.
+
 apiVersion: v1
 data:
   sock-shop-analytics-dashboard.json: |

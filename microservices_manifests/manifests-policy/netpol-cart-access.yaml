@@ -1,3 +1,4 @@
+# Description: This is a network policy that allows traffic to the cart service from the front-end and orders services.
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy

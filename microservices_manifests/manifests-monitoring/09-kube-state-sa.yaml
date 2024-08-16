@@ -1,3 +1,5 @@
+# This file creates a service account for kube-state-metrics
+
 apiVersion: v1
 kind: ServiceAccount
 metadata:
