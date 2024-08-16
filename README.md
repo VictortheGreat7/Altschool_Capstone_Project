@@ -46,17 +46,23 @@ In this repository, you have the Terraform, Bash and Ansible scripts you will ne
 
 9. **Edit Ingress Manifest to use your Domain Name**:
     In the [ingress.yaml](microservices_manifests/ingress.yaml) file, edit every instance of `<subdomain>.mywonder.works` to use your own domain name. For instance, if you see `kibana.mywonder.works` edit it to `kibana.yourdomain.com`.
+
     ![Where to find the the subdomains in the file](screenshots/png_files/edit_subdomains.png)
+
     If you don't place your domain name in that manifest file and configure your domain's DNS settings as specified in step 11, you will not be able to see your application in the browser except you use the `kubectl port-forward` command. If you try to use the external IP (that the Azure Loadbalancer, configured when [ingress.yaml](microservices_manifests/ingress.yaml) is applied by [clusterconfig_playbook.yaml](clusterconfig_playbook.yaml) Ansible script in the GitHub Actions workflow, will give you) in the browser, you will only get an error page.
 
 10. **Push to your GitHub Repository**:
     After following the previous steps correctly, uncomment the part of the [build.yaml](.github/workflows/build.yaml) script that triggers GitHub Actions (where I marked in green) to run the script on git push, then comment out (where I marked in red) the manual trigger part.
+
     ![GitHub Actions Build Trigger to choose](screenshots/png_files/github_build_trigger.png)
+
     Using `git` command in your terminal, add and commit the changes you have made, then push the repository to your GitHub Repository. GitHub Actions, following the instructions specified by the build script, will automatically build and deploy the application. Select the running workflow in the Actions section of your repository to view its progress.
 
 11. **Configure Domain Name DNS Settings**:
     In your domain provider's website, there should be a way to configure DNS settings for your domain. [clusterconfig_playbook.yaml](clusterconfig_playbook.yaml) Ansible script should output an External IP in the workflow like so.
+
     ![Ansible Script External IP Output](screenshots/png_files/external_ip_output.png)
+
     But if after GitHub Actions has run the deploy job successfully, you do not see that output, you will need to connect to the cluster on your local Ubuntu machine and check for it your self. To do that, go to the Azure Portal and look for a cluster named `capstone_cluster` in a resource group called `altschool-capstone-rg`, in the Overview dashboard of that cluster look for a `Connect` option. You will find the `az aks get-credentials` and `kubelogin` commands listed there. Run the `az aks get-credentials` command first, then the `kubelogin` command, on your bash terminal. If the first service_principal.sh script you ran earlier worked fine, you should be able to get access to the cluster. After you have successfully gotten access to the cluster you can run `kubectl get ingress` and get the LoadBalancer External IP you need. If the command runs successfully, copy the IP address you see under EXTERNAL IP and use it to configure A records for each subdomain. [my_subdomain_config.md](screenshots/my_subdomain_config.md) has screenshots of how I set A records for each subdomain specified in the [ingress.yaml](microservices_manifests/ingress.yaml) manifest.
 
 12. **View you Application from any Browser on any Device**:
@@ -79,8 +85,11 @@ In this repository, you have the Terraform, Bash and Ansible scripts you will ne
 
 15. **Destroy the Infrastructure**:
      When you are done testing, you can destroy the infrastructure by manually running the destroy workflow in the GitHub Actions section of your GitHub repository.
+
      ![All Workflows](screenshots/png_files/workflows.png)
+
      When you select the `Destroy Infrastructure` workflow, Github Actions will destroy the cloud infrastructure built earlier. Select the running workflow to view progress.
+
      ![Destroy Workflow 1](screenshots/png_files/destroy_workflow1.png)
      ![Destroy Workflow 2](screenshots/png_files/destroy_workflow2.png)
 
@@ -88,10 +97,13 @@ In this repository, you have the Terraform, Bash and Ansible scripts you will ne
 # Architecture Diagrams
 
 ## Build workflow Diagram
+
 ![Build Workflow](architecture/build_workflow.png)
 
 ## Destroy workflow diagram
+
 ![Build Workflow](architecture/destroy_workflow.png)
 
 ## Diagram of Infrastructure to be built by Terraform
+
 ![Cloud Infrastructure provisioned by Terraform](architecture/cloud_infrastructure.png)
