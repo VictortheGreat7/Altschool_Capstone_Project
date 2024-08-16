@@ -83,3 +83,15 @@ In this repository, you have the Terraform, Bash and Ansible scripts you will ne
      When you select the `Destroy Infrastructure` workflow, Github Actions will destroy the cloud infrastructure built earlier. Select the running workflow to view progress.
      ![Destroy Workflow 1](screenshots/png_files/destroy_workflow1.png)
      ![Destroy Workflow 2](screenshots/png_files/destroy_workflow2.png)
+
+
+# Architecture Diagrams
+
+## Build workflow Diagram
+![Build Workflow](architecture/build_workflow.png)
+
+## Destroy workflow diagram
+![Build Workflow](architecture/destroy_workflow.png)
+
+## Diagram of Infrastructure to be built by Terraform
+![Cloud Infrastructure provisioned by Terraform](architecture/cloud_infrastructure.png)
